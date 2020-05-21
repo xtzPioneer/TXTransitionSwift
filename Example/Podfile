@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'TXTransitionSwift_Example' do
+  pod 'TXTransitionSwift', :path => '../'
+
+  target 'TXTransitionSwift_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end

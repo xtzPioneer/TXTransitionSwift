@@ -1,0 +1,6 @@
+framework module TXTransitionSwift {
+  umbrella header "TXTransitionSwift-umbrella.h"
+
+  export *
+  module * { export * }
+}
