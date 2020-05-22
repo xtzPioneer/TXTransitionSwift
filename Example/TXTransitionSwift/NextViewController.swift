@@ -22,12 +22,22 @@ class NextViewController: UIViewController,UIViewControllerTransitioningDelegate
         self.dismiss(animated: true, completion: nil)
     }
     
-    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return TXWXTransitionSwift(type: .present)
-    }
+    // 转场动画1
+//    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+//        return TXWXTransitionSwift(type: .present)
+//    }
+//
+//    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+//        return TXWXTransitionSwift(type: .dissmiss)
+//    }
     
+    // 转场动画2
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return TXWaveTransition(type: .present, point: .init(x: 207, y: 333))
+    }
+
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return TXWXTransitionSwift(type: .dissmiss)
+        return TXWaveTransition(type: .dissmiss, point: .init(x: 207, y: 333))
     }
     
 }

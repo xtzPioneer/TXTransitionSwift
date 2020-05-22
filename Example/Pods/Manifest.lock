@@ -1,5 +1,5 @@
 PODS:
-  - TXTransitionSwift (0.1.0)
+  - TXTransitionSwift (0.1.1)
 
 DEPENDENCIES:
   - TXTransitionSwift (from `../`)
@@ -9,7 +9,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  TXTransitionSwift: a5c76da538b32e0dcfe904268da0adf9ea913420
+  TXTransitionSwift: 4b7906678f4223e4179e0f2e791d9b77e1579a38
 
 PODFILE CHECKSUM: 461c203f587915cf4ce609defa1ac5c7b8334340
 

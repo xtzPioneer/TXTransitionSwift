@@ -8,7 +8,7 @@
 
 import UIKit
 
-/// 仿微信小程序转场动画Swift版本.
+/// 仿微信小程序转场动画
 open class TXWXTransitionSwift: NSObject, UIViewControllerAnimatedTransitioning {
     
     /// 转场类型
@@ -26,7 +26,7 @@ open class TXWXTransitionSwift: NSObject, UIViewControllerAnimatedTransitioning 
     /// 构造方法
     ///
     /// - Parameters:
-    ///   - transitionType: 转场类型.
+    ///   - transitionType: 转场类型
     ///
     public init(type transitionType: TXWXTransitionType) {
         self.type = transitionType
@@ -40,9 +40,9 @@ open class TXWXTransitionSwift: NSObject, UIViewControllerAnimatedTransitioning 
     /// present动画
     ///
     /// - Parameters:
-    ///   - transitionContext: 转场上下文.
+    ///   - transitionContext: 转场上下文
     ///
-    private func presentAnimation <T: UIViewControllerContextTransitioning> (using transitionContext: T) -> Void {
+    private func presentAnimation(using transitionContext: UIViewControllerContextTransitioning) -> Void {
         // 设置toVC
         let toVC: UIViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to)!
         toVC.view!.frame = .init(x: 0, y: UIScreen.main.bounds.size.height, width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height)
@@ -76,9 +76,9 @@ open class TXWXTransitionSwift: NSObject, UIViewControllerAnimatedTransitioning 
     /// dissmiss动画
     ///
     /// - Parameters:
-    ///   - transitionContext: 转场上下文.
+    ///   - transitionContext: 转场上下文
     ///
-    private func dissmissAnimation <T: UIViewControllerContextTransitioning> (using transitionContext: T) -> Void {
+    private func dissmissAnimation(using transitionContext: UIViewControllerContextTransitioning) -> Void {
         // 设置toVC
         let toVC: UIViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to)!
         // 设置fromVC
@@ -110,10 +110,10 @@ open class TXWXTransitionSwift: NSObject, UIViewControllerAnimatedTransitioning 
     
     public func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         switch self.type {
-            case .present:
-                self.presentAnimation(using: transitionContext)
-            case .dissmiss:
-                self.dissmissAnimation(using: transitionContext)
+        case .present:
+            self.presentAnimation(using: transitionContext)
+        case .dissmiss:
+            self.dissmissAnimation(using: transitionContext)
         }
     }
 }
