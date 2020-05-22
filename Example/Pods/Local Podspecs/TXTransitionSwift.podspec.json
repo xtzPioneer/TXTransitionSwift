@@ -16,9 +16,11 @@
     "tag": "0.1.1"
   },
   "platforms": {
-    "ios": "8.0"
+    "ios": "10.0"
   },
+  "swift_versions": "5.2",
   "source_files": "TXTransitionSwift/Classes/**/*.{swift}",
   "public_header_files": "Pod/Classes/**/*.{swift}",
-  "frameworks": "UIKit"
+  "frameworks": "UIKit",
+  "swift_version": "5.2"
 }
