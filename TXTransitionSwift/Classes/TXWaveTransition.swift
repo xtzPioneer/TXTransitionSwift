@@ -7,112 +7,14 @@
 
 import UIKit
 
-/// 现象样式
-public enum TXQuadrantStyle {
-    /// 第一象限
-    case first
-    /// 第二象限
-    case second
-    /// 第三象限
-    case third
-    /// 第四象限
-    case fourth
-}
-
-/// 现象样式扩展
-extension TXQuadrantStyle {
-    ///
-    /// 计算半径
-    ///
-    /// - Parameters:
-    ///   - touchPoint: 位置
-    /// - Returns
-    ///   CGFloat 半径
-    ///
-    public func radius(point touchPoint: CGPoint) -> CGFloat {
-        switch self {
-        case .first:
-            return sqrt(touchPoint.x * touchPoint.x + (UIScreen.main.bounds.size.height - touchPoint.y) * (UIScreen.main.bounds.size.height - touchPoint.y));
-        case .second:
-            return sqrt((UIScreen.main.bounds.size.width - touchPoint.x) * (UIScreen.main.bounds.size.width - touchPoint.x)  + (UIScreen.main.bounds.size.height - touchPoint.y) * (UIScreen.main.bounds.size.height - touchPoint.y));
-        case .third:
-            return sqrt((UIScreen.main.bounds.size.width - touchPoint.x) * (UIScreen.main.bounds.size.width - touchPoint.x)  + touchPoint.y * touchPoint.y);
-        case .fourth:
-            return sqrt(touchPoint.x * touchPoint.x  + touchPoint.y * touchPoint.y);
-        }
-    }
-}
-
-/// 现象识别
-open class TXQuadrantRecognise {
-    
-    /// 样式 (私有存储属性)
-    private var quadrantStyle: TXQuadrantStyle  = .first
-    
-    /// 样式(公开计算属性)
-    public var style: TXQuadrantStyle {
-        get {
-            return self.quadrantStyle
-        }
-    }
-    
-    ///
-    /// 识别
-    ///
-    /// - Parameters:
-    ///   - touchPoint: 位置
-    /// - Returns
-    ///   CGFloat 半径
-    ///
-    public func recognise(point touchPoint: CGPoint) -> CGFloat {
-        if (touchPoint.x >= UIScreen.main.bounds.size.width / 2) {
-            if (touchPoint.y >= UIScreen.main.bounds.size.height / 2) {
-                self.quadrantStyle = .fourth;
-            }else{
-                self.quadrantStyle = .first;
-            }
-        }else{
-            if (touchPoint.y >= UIScreen.main.bounds.size.height / 2) {
-                self.quadrantStyle = .third;
-            }else{
-                self.quadrantStyle = .second;
-            }
-        }
-        return self.style.radius(point: touchPoint)
-    }
-    
-    ///
-    /// 识别
-    ///
-    /// - Parameters:
-    ///   - touchPoint: 位置
-    /// - Returns
-    ///   CGFloat 半径
-    ///
-    class func recognise(point touchPoint: CGPoint) -> CGFloat {
-        return TXQuadrantRecognise.init().recognise(point: touchPoint)
-    }
-}
-
 /// 波浪式的转场动画
-open class TXWaveTransition: NSObject, UIViewControllerAnimatedTransitioning, UICollectionViewDelegate, CAAnimationDelegate {
+open class TXWaveTransition: NSObject, TXTransitionSwift, CAAnimationDelegate {
     
-    /// 转场类型
-    public enum TXWTTransitionType {
-        /// present
-        case present
-        /// dissmiss
-        case dissmiss
+    public var type: TXTransitionType
+    
+    public required init(type transitionType: TXTransitionType) {
+        self.type = transitionType
     }
-    
-    /// 转场类型
-    public var type: TXWTTransitionType = .present
-    
-    /// 位置
-    public var point: CGPoint = .init(x: 0.0, y: 0.0)
-    
-    /// 转场上下文(私有属性)
-    private var transitionContext: UIViewControllerContextTransitioning?
     
     ///
     /// 构造方法
@@ -121,18 +23,18 @@ open class TXWaveTransition: NSObject, UIViewControllerAnimatedTransitioning, UI
     ///   - transitionType: 转场类型
     ///   - touchPoint: 位置
     ///
-    public init(type transitionType:TXWTTransitionType, point touchPoint: CGPoint) {
+    public init (type transitionType: TXTransitionType,point touchPoint: CGPoint) {
         self.type = transitionType
         self.point = touchPoint
     }
     
-    ///
-    /// present动画
-    ///
-    /// - Parameters:
-    ///   - transitionContext: 转场上下文
-    ///
-    private func presentAnimation(using transitionContext: UIViewControllerContextTransitioning) -> Void {
+    /// 位置
+    public var point: CGPoint = .init(x: 0.0, y: 0.0)
+    
+    /// 转场上下文(私有属性)
+    private var transitionContext: UIViewControllerContextTransitioning?
+ 
+    public func presentAnimation(using transitionContext: UIViewControllerContextTransitioning) -> Void {
         // 设置toVC
         let toVC: UIViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to)!
         toVC.view!.frame = .init(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height)
@@ -156,13 +58,7 @@ open class TXWaveTransition: NSObject, UIViewControllerAnimatedTransitioning, UI
         maskLayer.add(basicAnim, forKey: "path")
     }
     
-    ///
-    /// dissmiss动画
-    ///
-    /// - Parameters:
-    ///   - transitionContext: 转场上下文
-    ///
-    private func dissmissAnimation(using transitionContext: UIViewControllerContextTransitioning) -> Void {
+    public func dissmissAnimation(using transitionContext: UIViewControllerContextTransitioning) -> Void {
         // 设置fromVC
         let fromVC: UIViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from)!
         // 绘制路径
@@ -203,4 +99,5 @@ open class TXWaveTransition: NSObject, UIViewControllerAnimatedTransitioning, UI
            self.dissmissAnimation(using: transitionContext)
         }
     }
+    
 }

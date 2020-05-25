@@ -13,6 +13,7 @@ class NextViewController: UIViewController,UIViewControllerTransitioningDelegate
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         // 注意这两个属性必须设置
         self.modalPresentationStyle = .custom
         self.transitioningDelegate = self;

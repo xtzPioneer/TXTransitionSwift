@@ -9,26 +9,11 @@
 import UIKit
 
 /// 仿微信小程序转场动画
-open class TXWXTransitionSwift: NSObject, UIViewControllerAnimatedTransitioning {
+open class TXWXTransitionSwift: NSObject, TXTransitionSwift {
     
-    /// 转场类型
-    public enum TXWXTransitionType {
-        /// present
-        case present
-        /// dissmiss
-        case dissmiss
-    }
+    public var type: TXTransitionType = .present
     
-    /// 转场类型
-    public var type: TXWXTransitionType  = .present
-    
-    ///
-    /// 构造方法
-    ///
-    /// - Parameters:
-    ///   - transitionType: 转场类型
-    ///
-    public init(type transitionType: TXWXTransitionType) {
+    public required init(type transitionType: TXTransitionType) {
         self.type = transitionType
     }
     
@@ -36,13 +21,7 @@ open class TXWXTransitionSwift: NSObject, UIViewControllerAnimatedTransitioning 
         return 0.35
     }
     
-    ///
-    /// present动画
-    ///
-    /// - Parameters:
-    ///   - transitionContext: 转场上下文
-    ///
-    private func presentAnimation(using transitionContext: UIViewControllerContextTransitioning) -> Void {
+    public func presentAnimation(using transitionContext: UIViewControllerContextTransitioning) -> Void {
         // 设置toVC
         let toVC: UIViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to)!
         toVC.view!.frame = .init(x: 0, y: UIScreen.main.bounds.size.height, width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height)
@@ -72,13 +51,7 @@ open class TXWXTransitionSwift: NSObject, UIViewControllerAnimatedTransitioning 
         }, completion: nil)
     }
     
-    ///
-    /// dissmiss动画
-    ///
-    /// - Parameters:
-    ///   - transitionContext: 转场上下文
-    ///
-    private func dissmissAnimation(using transitionContext: UIViewControllerContextTransitioning) -> Void {
+    public func dissmissAnimation(using transitionContext: UIViewControllerContextTransitioning) -> Void {
         // 设置toVC
         let toVC: UIViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to)!
         // 设置fromVC
@@ -116,4 +89,5 @@ open class TXWXTransitionSwift: NSObject, UIViewControllerAnimatedTransitioning 
             self.dissmissAnimation(using: transitionContext)
         }
     }
+    
 }
