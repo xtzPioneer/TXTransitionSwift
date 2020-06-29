@@ -15,16 +15,10 @@ public enum TXTransitionType {
     case dissmiss
 }
 
-//  核心
-//  Swift 的核心是面向协议编程
-//  Swift 应该从一个协议开始
-
-/// 转场动画协议
+/// 转场动画
 public protocol TXTransitionSwift: UIViewControllerAnimatedTransitioning {
-    
     /// 转场类型
-    var type: TXTransitionType { get set}
-    
+    var type: TXTransitionType { get set }
     ///
     /// present动画
     ///
@@ -32,7 +26,6 @@ public protocol TXTransitionSwift: UIViewControllerAnimatedTransitioning {
     ///   - transitionContext: 转场上下文
     ///
     func presentAnimation(using transitionContext: UIViewControllerContextTransitioning) -> Void
-    
     ///
     /// dissmiss动画
     ///
@@ -40,7 +33,6 @@ public protocol TXTransitionSwift: UIViewControllerAnimatedTransitioning {
     ///   - transitionContext: 转场上下文
     ///
     func dissmissAnimation(using transitionContext: UIViewControllerContextTransitioning) -> Void
-    
     ///
     /// 构造方法
     ///
@@ -48,6 +40,5 @@ public protocol TXTransitionSwift: UIViewControllerAnimatedTransitioning {
     ///   - transitionType: 转场类型
     ///
     init(type transitionType: TXTransitionType)
-    
 }
 

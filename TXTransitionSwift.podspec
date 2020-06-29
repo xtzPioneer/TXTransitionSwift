@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'TXTransitionSwift'
-  s.version          = '0.2.0'
+  s.version          = '0.2.1'
   s.summary          = 'iOS转场动画Swift版本.'
   s.description      = <<-DESC
   由TX所开发的iOS转场动画Swift版本.

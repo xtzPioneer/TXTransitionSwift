@@ -1,6 +1,6 @@
 {
   "name": "TXTransitionSwift",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "summary": "iOS转场动画Swift版本.",
   "description": "由TX所开发的iOS转场动画Swift版本.",
   "homepage": "https://github.com/xtzPioneer/TXTransitionSwift",
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/xtzPioneer/TXTransitionSwift.git",
-    "tag": "0.2.0"
+    "tag": "0.2.1"
   },
   "platforms": {
     "ios": "10.0"
